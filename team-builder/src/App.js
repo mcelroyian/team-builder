@@ -25,8 +25,7 @@ function App() {
     nickName: '',
     email: '',
     team: 'Gulf Coast',
-    position: 'Wide Reciever'
-
+    position: 'Wide Reciever',
   }
 
   //State
@@ -35,14 +34,42 @@ function App() {
 
   const [form, setForm] = useState(startingValues)
 
+  const [playerToEdit, setPlayerToEdit] = useState(null)
+
   //Event listeners
   
-  const onChange = e => {
-
+  const onInputChange = e => {
+      const key = e.target.name
+      const value = e.target.value
+      setForm({...form, [key]:value})
   }
 
   const onSubmit = e => {
+    e.preventDefault()
+      const newTeammate = {
+        id: uuid(),
+        name: form.name,
+        nickName: form.nickName,
+        email: form.email,
+        team: form.team,
+        position: form.position,
+      }
 
+      setTeammates([...teammates, newTeammate])
+      setForm(startingValues)
+  }
+
+  // EDIT HANDLER
+  const editHandler = (player) => {
+      const playerEditing = {
+        id: player.id,
+        name: player.name,
+        nickName: player.nickName,
+        position: player.position,
+        email: player.email,
+        team: player.team,
+      }
+      setPlayerToEdit(playerEditing)
   }
   
   
@@ -54,10 +81,16 @@ function App() {
     <h1>Teammates</h1>
 
     { teammates.map(player => {
-      return <Team profile={player} key={player.id} />
+      return <Team profile={player} key={player.id} editHandler={editHandler} />
     })}
 
-    <AddTeammate values={{}} onChange={onChange} onSubmit={onSubmit} />
+    <AddTeammate
+      playerToEdit={playerToEdit} 
+      values={form} 
+      onInputChange={onInputChange} 
+      onSubmit={onSubmit} 
+
+      />
     </div>
   );
 }

@@ -2,49 +2,50 @@ import React from 'react'
 
 function AddTeammate(props) {
 
-    const { values } = props
+    const { values, onInputChange, onSubmit, playerToEdit } = props
 
 return(
     <form>
         <h2>Add a Teammate</h2>
         <label>Name:&nbsp; <input 
-            value=''
-            onChange={values.onChange}
+            value={values.name}
+            onChange={onInputChange}
             name='name'
             type='text'
-        /></label>< br/>
+        /></label><br/>
         <label>Nick Name:&nbsp; <input 
-            value=''
-            onChange={values.onChange}
+            value={values.nickName}
+            onChange={onInputChange}
             name='nickName'
             type='text'
-        /></label>< br/>
+        /></label><br/>
         <label>Email:&nbsp; <input 
-            value=''
-            onChange={values.onChange}
+            value={values.email}
+            onChange={onInputChange}
             name='email'
             type='text'
-        /></label>< br/>
+        /></label><br/>
         <label>Team:&nbsp; <select
             name='team'
-            value=''
-            onChange={values.onChange}
+            value={values.team}
+            onChange={onInputChange}
         >
             <option value='Hattiesburg'>Hattiesburg</option>
             <option value='Houma'>Houma</option>
             <option value='New Orleans'>New Orleans</option>
             <option value='Gulf Coast'>Gulf Coast</option>
             <option value='Mobile'>Mobile</option>
-        </select></label>< br/>
+        </select></label><br/>
         <label>Position:&nbsp; <select
             name='position'
-            value=''
-            onChange={values.onChange}
+            value={values.position}
+            onChange={onInputChange}
         >
             <option value='QuarterBack'>QuarterBack</option>
             <option value='LineMan'>Linemen</option>
             <option value='Wide Reciever'>Wide Reciever</option>
-        </select></label>
+        </select></label><br />
+        <button onClick={onSubmit}>Add New Teammate</button>
     </form>
 
 )
